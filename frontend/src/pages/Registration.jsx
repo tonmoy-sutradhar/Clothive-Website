@@ -1,8 +1,12 @@
 import logo from "../assets/vcart logo.png";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
+import { IoIosEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
+import { useState } from "react";
 function Registration() {
   let navigate = useNavigate();
+  let [show, setShow] = useState(false);
   return (
     <div className="w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] flex flex-col items-center justify-start">
       <div
@@ -40,7 +44,7 @@ function Registration() {
             <div className="w-[40%] h-[1px] bg-[#96969635]"></div>
           </div>
 
-          <div className="w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
+          <div className="relative w-[90%] h-[400px] flex flex-col items-center justify-center gap-[15px]">
             <input
               type="text"
               className="w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold"
@@ -54,11 +58,23 @@ function Registration() {
               required
             />
             <input
-              type="password"
+              type={show ? "text" : "password"}
               className="w-[100%] h-[50px] border-[2px] border-[#96969635] backdrop:blur-sm rounded-lg shadow-lg bg-transparent placeholder-[#ffffffc7] px-[20px] font-semibold"
               placeholder="Password"
               required
             />
+            {!show && (
+              <IoIosEyeOff
+                className="w-[20px] h-[20px] cursor-pointer absolute right-[5%]"
+                onClick={() => setShow((pre) => !pre)}
+              />
+            )}
+            {show && (
+              <IoIosEye
+                className="w-[20px] h-[20px] cursor-pointer absolute right-[5%]"
+                onClick={() => setShow((pre) => !pre)}
+              />
+            )}
 
             <button className="w-[100%] h-[50px] bg-[#6060f5] flex rounded-lg items-center justify-center mt-[20px] text-[17px] font-semibold cursor-pointer">
               create Account
