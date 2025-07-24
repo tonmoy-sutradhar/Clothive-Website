@@ -6,6 +6,8 @@ import { IoIosEyeOff } from "react-icons/io";
 import { useContext, useState } from "react";
 import { authDataContext } from "../context/AuthContext";
 import axios from "axios";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase/firebase.config";
 function Registration() {
   let navigate = useNavigate();
   let [show, setShow] = useState(false);
@@ -30,6 +32,25 @@ function Registration() {
       console.log(result.data);
     } catch (err) {
       console.log("Frontend Registration error -->", err);
+    }
+  };
+
+  // Google signup
+  const googleSignup = async (e) => {
+    try {
+      const response = await signInWithPopup(auth, provider);
+      let user = response.user;
+      let name = user.displayName;
+      let email = user.email;
+
+      const result = await axios.post(
+        `${serverUrl}/api/auth/googlelogin `,
+        { name, email },
+        { withCredentials: true }
+      );
+      console.log("Google login", result.data);
+    } catch (err) {
+      console.log(err, "Google issue from Registration");
     }
   };
 
@@ -62,7 +83,10 @@ function Registration() {
           className=" w-[90%] h-[90%] flex flex-col items-center justify-start gap-[20px]"
         >
           {/* Login with Google  */}
-          <div className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer">
+          <div
+            onClick={googleSignup}
+            className="w-[90%] h-[50px] bg-[#42656cae] rounded-lg flex items-center justify-center gap-[10px] py-[20px] cursor-pointer"
+          >
             {" "}
             <img src={google} alt="Google" className="w-[20px]" /> Registration
             with Google
