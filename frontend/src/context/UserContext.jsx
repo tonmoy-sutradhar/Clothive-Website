@@ -10,14 +10,14 @@ function UserContext({ children }) {
 
   const getCurrentUser = async () => {
     try {
-      let result = await axios.post(`${serverUrl}/api/user/getcurrentuser`, {
+      let result = await axios.get(`${serverUrl}/api/user/getcurrentuser`, {
         withCredentials: true,
       });
       setUserData(result.data);
       console.log("UserContext data ", result.data);
     } catch (err) {
       setUserData(null);
-      console.log("error in usercontext.");
+      console.log("error in usercontext -->.", err);
     }
   };
 

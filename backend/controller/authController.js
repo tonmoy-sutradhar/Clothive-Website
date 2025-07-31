@@ -62,7 +62,7 @@ export const login = async (req, res) => {
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    return res.status(201).json({ message: "Login successful" });
+    return res.status(201).json({ message: "Login successful" }, user);
   } catch (err) {
     console.log("Login error from authController", err);
     return res.status(500).json({ message: `Login error ${err}` });
