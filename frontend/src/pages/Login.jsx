@@ -1,4 +1,4 @@
-import logo from "../assets/vcart logo.png";
+import logo from "../assets/logo.png";
 import google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
