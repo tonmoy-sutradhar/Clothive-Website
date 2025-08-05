@@ -8,6 +8,7 @@ import { authDataContext } from "./../context/AuthContext";
 import axios from "axios";
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase/firebase.config";
+import { userDataContext } from "../context/UserContext";
 
 function Login() {
   let [show, setShow] = useState(false);
@@ -15,6 +16,7 @@ function Login() {
   let { serverUrl } = useContext(authDataContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let { getCurrentUser } = useContext(userDataContext);
 
   // Login operation
   const handleLogin = async (e) => {
@@ -29,6 +31,8 @@ function Login() {
         { withCredentials: true }
       );
       console.log(result.data);
+      getCurrentUser();
+      navigate("/");
     } catch (error) {
       console.log("login error from frontend -->", error);
     }
