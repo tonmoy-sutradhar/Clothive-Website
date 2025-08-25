@@ -7,6 +7,10 @@ import { userDataContext } from "./../context/UserContext";
 import { IoSearchCircleSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IoMdHome } from "react-icons/io";
+import { HiCollection } from "react-icons/hi";
+import { MdContacts } from "react-icons/md";
+import { FaCartShopping } from "react-icons/fa6";
 
 function Nav() {
   let { userData, getCurrentUser } = useContext(userDataContext);
@@ -35,7 +39,7 @@ function Nav() {
         <img className="w-[30px]" src={logo} alt="" />
         <h1 className="text-[25px] text-[black] font-sans">CLOTHIVE</h1>
       </div>
-      <div className="w-[40%]">
+      <div className="w-[40%] hidden md:flex">
         <ul className="flex items-center justify-center gap-[19px] text-white">
           <li className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl">
             HOME
@@ -78,10 +82,11 @@ function Nav() {
             {userData?.name.slice(0, 1)}
           </div>
         )}
-        <IoMdCart className="w-[30px] h-[30px] text-[#000000] cursor-pointer" />
-        {/* <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px]">
+
+        <IoMdCart className="w-[30px] h-[30px] text-[#000000] cursor-pointer hidden md:block" />
+        <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px] hidden md:block">
           10
-        </p> */}
+        </p>
       </div>
 
       {/* Show Search bar */}
@@ -131,6 +136,24 @@ function Nav() {
           </ul>
         </div>
       )}
+
+      <div className="w-[100vw] h-[90px] flex items-center justify-between px-[20px] text-[12px] fixed bottom-0 left-0 bg-[#191818] md:hidden">
+        <button className="text-white flex items-center justify-center flex-col gap-[2px] ">
+          <IoMdHome className="w-[25px] h-[25px] text-white md:hidden" /> Home
+        </button>
+        <button className="text-white flex items-center justify-center flex-col gap-[2px]">
+          <HiCollection className="w-[25px] h-[25px] text-white md:hidden" />{" "}
+          Collections
+        </button>
+        <button className="text-white flex items-center justify-center flex-col gap-[2px]">
+          <MdContacts className="w-[25px] h-[25px] text-white md:hidden" />{" "}
+          Contact
+        </button>
+        <button className="text-white flex items-center justify-center flex-col gap-[2px]">
+          <FaCartShopping className="w-[25px] h-[25px] text-white md:hidden" />{" "}
+          Cart
+        </button>
+      </div>
     </div>
   );
 }
