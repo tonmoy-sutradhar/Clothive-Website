@@ -116,6 +116,7 @@ function Nav() {
                 onClick={() => {
                   handleLogout();
                   setShowProfile(false);
+                  navigate("/login");
                 }}
               >
                 LogOut

@@ -3,11 +3,15 @@ import Home from "../pages/Home";
 import Registration from "../pages/Registration";
 import Login from "../pages/Login";
 import Nav from "./../component/Nav";
+import { useContext } from "react";
+import { userDataContext } from "../context/UserContext";
 
 function Router() {
+  const { userData } = useContext(userDataContext);
   return (
     <>
-      <Nav></Nav>
+      {userData && <Nav></Nav>}
+      {/* <Nav></Nav> */}
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/login" element={<Login></Login>}></Route>

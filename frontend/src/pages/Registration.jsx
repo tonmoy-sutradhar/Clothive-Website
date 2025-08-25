@@ -53,6 +53,8 @@ function Registration() {
         { withCredentials: true }
       );
       console.log("Google login", result.data);
+      getCurrentUser();
+      navigate("/");
     } catch (err) {
       console.log(err, "Google issue from Registration");
     }
