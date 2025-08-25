@@ -13,6 +13,7 @@ function UserContext({ children }) {
       let result = await axios.get(`${serverUrl}/api/user/getcurrentuser`, {
         withCredentials: true,
       });
+
       setUserData(result.data);
       console.log("UserContext data ", result.data);
     } catch (err) {
@@ -27,11 +28,9 @@ function UserContext({ children }) {
 
   let value = { userData, setUserData, getCurrentUser };
   return (
-    <div>
-      <userDataContext.Provider value={value}>
-        {children}
-      </userDataContext.Provider>
-    </div>
+    <userDataContext.Provider value={value}>
+      {children}
+    </userDataContext.Provider>
   );
 }
 

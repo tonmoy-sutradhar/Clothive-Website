@@ -6,11 +6,9 @@ function AuthContext({ children }) {
   let serverUrl = "http://localhost:7000";
   let value = { serverUrl };
   return (
-    <div>
-      <authDataContext.Provider value={value}>
-        {children}
-      </authDataContext.Provider>
-    </div>
+    <authDataContext.Provider value={value}>
+      {children}
+    </authDataContext.Provider>
   );
 }
 
