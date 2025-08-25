@@ -1,12 +1,15 @@
-import { IoSearchCircleOutline } from "react-icons/io5";
 import logo from "../assets/logo.png";
+import { IoSearchCircleOutline } from "react-icons/io5";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdCart } from "react-icons/io";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { userDataContext } from "./../context/UserContext";
+import { IoSearchCircleSharp } from "react-icons/io5";
 
 function Nav() {
   let { userData } = useContext(userDataContext);
+  let [showSearch, setShowSearch] = useState(false);
+
   return (
     <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black">
       <div className="w-[30%] flex items-center justify-start gap-[10px]">
@@ -30,20 +33,41 @@ function Nav() {
         </ul>
       </div>
       <div className="w-[30%] flex items-center justify-end gap-[20px]">
-        <IoSearchCircleOutline className="w-[38px] h-[38px] text-[#000000] cursor-pointer" />
+        {!showSearch && (
+          <IoSearchCircleOutline
+            className="w-[38px] h-[38px] text-[#000000] cursor-pointer"
+            onClick={() => setShowSearch((prev) => !prev)}
+          />
+        )}
+        {showSearch && (
+          <IoSearchCircleSharp
+            className="w-[38px] h-[38px] text-[#000000] cursor-pointer"
+            onClick={() => setShowSearch((prev) => !prev)}
+          />
+        )}
         {!userData && (
           <FaUserCircle className="w-[29px] h-[29px] text-[#000000] cursor-pointer" />
         )}
         {userData && (
-          <div className="w-[30px] h-[30px] bg-[#000000] text-white rounded-full  ">
+          <div className="w-[30px] h-[30px] bg-[#000000] text-white rounded-full flex items-center justify-center">
             {userData?.name.slice(0, 1)}
           </div>
         )}
         <IoMdCart className="w-[30px] h-[30px] text-[#000000] cursor-pointer" />
-        <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px]">
+        {/* <p className="absolute w-[18px] h-[18px] items-center justify-center bg-black px-[5px] py-[2px] text-white rounded-full text-[9px] top-[10px] right-[23px]">
           10
-        </p>
+        </p> */}
       </div>
+
+      {showSearch && (
+        <div className="w-[100%] h-[80px] bg-[#d8f6f9dd] absolute top-[100%] left-0 right-0 flex items-center justify-center">
+          <input
+            type="text"
+            className="w-[50%] h-[60%] bg-[#233533] rounded-[30px] px-[50px] placeholder:text-white text-[white] text-[18px]"
+            placeholder="Search Here"
+          />
+        </div>
+      )}
     </div>
   );
 }
