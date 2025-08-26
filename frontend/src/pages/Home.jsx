@@ -20,13 +20,15 @@ function Home() {
   }, []);
 
   return (
-    <div className="w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025]">
-      <Background heroCount={heroCount}></Background>
-      <Hero
-        heroCount={heroCount}
-        setHeroCount={setHeroCount}
-        heroData={heroData[heroCount]}
-      ></Hero>
+    <div className="overflow-x-hidden relative top-[70px]">
+      <div className="w-[100vw] lg:h-[100vh] md:h-[50vh] h-[30vh] bg-gradient-to-l from-[#141414] to-[#0c2025]">
+        <Background heroCount={heroCount}></Background>
+        <Hero
+          heroCount={heroCount}
+          setHeroCount={setHeroCount}
+          heroData={heroData[heroCount]}
+        ></Hero>
+      </div>
     </div>
   );
 }
