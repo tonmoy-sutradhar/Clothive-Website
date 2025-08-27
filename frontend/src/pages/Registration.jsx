@@ -23,7 +23,7 @@ function Registration() {
     e.preventDefault();
     try {
       const result = await axios.post(
-        `${serverUrl}/api/auth/registration`,
+        `${import.meta.env.VITE_API_URL}/api/auth/registration`,
         {
           name,
           email,
@@ -48,7 +48,7 @@ function Registration() {
       let email = user.email;
 
       const result = await axios.post(
-        `${serverUrl}/api/auth/googlelogin `,
+        `${import.meta.env.VITE_API_URL}/api/auth/googlelogin `,
         { name, email },
         { withCredentials: true }
       );

@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
     try {
       const result = await axios.post(
-        `${serverUrl}/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         {
           email,
           password,
@@ -47,7 +47,7 @@ function Login() {
       let email = user.email;
 
       const result = await axios.post(
-        `${serverUrl}/api/auth/googlelogin `,
+        `${import.meta.env.VITE_API_URL}/api/auth/googlelogin `,
         { name, email },
         { withCredentials: true }
       );

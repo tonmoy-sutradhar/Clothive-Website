@@ -12,16 +12,16 @@ function Home() {
 
   let [heroCount, setHeroCount] = useState(0);
 
-  useEffect(() => {
-    let interval = setInterval(() => {
-      setHeroCount((prevCount) => (prevCount === 3 ? 0 : prevCount + 1));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  // let interval = setInterval(() => {
+  //   setHeroCount((prevCount) => (prevCount === 3 ? 0 : prevCount + 1));
+  // }, 3000);
+  // return () => clearInterval(interval);
+  // }, []);
 
   return (
     <div className="overflow-x-hidden relative top-[70px]">
-      <div className="w-[100vw] lg:h-[100vh] md:h-[50vh] h-[30vh] bg-gradient-to-l from-[#141414] to-[#0c2025]">
+      <div className="w-[100vw] lg:h-[80vh] md:h-[50vh] h-[30vh] bg-gradient-to-l from-[#141414] to-[#0c2025]">
         <Background heroCount={heroCount}></Background>
         <Hero
           heroCount={heroCount}
