@@ -12,10 +12,9 @@ import { userDataContext } from "../context/UserContext";
 
 function Login() {
   let [show, setShow] = useState(false);
-  let navigate = useNavigate();
-  let { serverUrl } = useContext(authDataContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let navigate = useNavigate();
   let { getCurrentUser } = useContext(userDataContext);
 
   // Login operation
