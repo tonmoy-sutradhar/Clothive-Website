@@ -1,3 +1,4 @@
+import e from "express";
 import User from "../model/userModel.js";
 
 export const getCurrentUser = async (req, res) => {
@@ -13,5 +14,21 @@ export const getCurrentUser = async (req, res) => {
     return res
       .status(500)
       .json({ message: `UserController getCurrent user error ${err}` });
+  }
+};
+
+// Admin
+export const getAdmin = async (req, res) => {
+  try {
+    let adminEmail = req.adminEmail;
+
+    if (!adminEmail) {
+      return res.status(400).json({ message: "Admin not found" });
+    }
+
+    return res.status(201).json({ email: adminEmail, role: "admin" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Get admin error" });
   }
 };
