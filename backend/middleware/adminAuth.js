@@ -1,10 +1,10 @@
-import { jwt } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 const adminAuth = async (req, res, next) => {
   try {
     let { token } = req.cookies;
 
-    if (token) {
+    if (!token) {
       return res
         .status(400)
         .json({ message: "Not Authorized Admin, Login again" });
