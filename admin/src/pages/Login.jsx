@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import axios from "axios";
+import { adminDataContext } from "../Context/AdminContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   let [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  let { adminData, getAdmin } = useContext(adminDataContext);
+  let navigate = useNavigate();
 
   const AdminLogin = async (e) => {
     e.preventDefault();
@@ -21,6 +25,8 @@ function Login() {
         },
         { withCredentials: true }
       );
+      getAdmin();
+      navigate("/");
       console.log(result);
     } catch (err) {
       console.log(err);
