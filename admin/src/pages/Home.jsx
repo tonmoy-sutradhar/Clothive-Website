@@ -1,10 +1,11 @@
-import React from "react";
+import Nav from "../component/Nav";
 
 function Home() {
   return (
-    <div>
-      <h1 className="text-9xl font-bold text-center text-red-500">HOME</h1>
-    </div>
+    <>
+      <Nav></Nav>
+      <div className="w-[100vw] h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-white relative"></div>
+    </>
   );
 }
 
