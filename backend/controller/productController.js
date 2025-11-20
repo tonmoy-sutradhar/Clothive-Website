@@ -1,4 +1,5 @@
 import uploadOnCloudinary from "../config/cloudinary.js";
+import product from "../model/productModel.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -25,8 +26,8 @@ export const addProduct = async (req, res) => {
       image4,
     };
 
-    const product = await product.create(productData);
-    return res.status(201).json(product);
+    const newProduct = await product.create(productData);
+    return res.status(201).json(newProduct);
   } catch (err) {
     console.log("error in productController", err);
     return res.status(500).json({ message: `AddProduct error` });

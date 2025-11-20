@@ -3,7 +3,11 @@ import React, { createContext } from "react";
 export const authDataContext = createContext();
 
 function AuthContext({ children }) {
-  let value = {};
+  const serverUrl = import.meta.env.VITE_API_URL;
+
+  const value = {
+    serverUrl,
+  };
   return (
     <div>
       <authDataContext.Provider value={value}>
