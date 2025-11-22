@@ -1,4 +1,5 @@
 import uploadOnCloudinary from "../config/cloudinary.js";
+import Product from "../model/productModel.js";
 import product from "../model/productModel.js";
 
 export const addProduct = async (req, res) => {
@@ -26,7 +27,7 @@ export const addProduct = async (req, res) => {
       image4,
     };
 
-    const newProduct = await product.create(productData);
+    const newProduct = await Product.create(productData);
     return res.status(201).json(newProduct);
   } catch (err) {
     console.log("error in productController", err);
@@ -35,3 +36,26 @@ export const addProduct = async (req, res) => {
 };
 
 export default addProduct;
+
+// Show the list
+export const listProduct = async (req, res) => {
+  try {
+    const product = await Product.find({});
+    return res.status(201).json(product);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: `ListProduct error` });
+  }
+};
+
+// Remove product
+export const removeProduct = async (req, res) => {
+  try {
+    let { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+    return res.status(201).json(product);
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: `RemoveProduct error` });
+  }
+};
