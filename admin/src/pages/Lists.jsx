@@ -1,9 +1,71 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import Nav from "../component/Nav";
+import Sidebar from "../component/Sidebar";
+import axios from "axios";
 
 function Lists() {
+  let [list, setList] = useState([]);
+
+  const fetchList = async () => {
+    try {
+      let result = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/product/list`,
+        {
+          withCredentials: true,
+        }
+      );
+      setList(result.data);
+      console.log(result.data);
+    } catch (err) {
+      console.log(err, "List error in admin.");
+    }
+  };
+
+  useEffect(() => {
+    fetchList();
+  }, []);
   return (
-    <div>
-      <h1>list</h1>
+    <div className="w-[100vw] min-h-[100vh] bg-gradient-to-l from-[#141414] to-[#0c2025] text-[white] ">
+      {/* <Nav></Nav> */}
+      <Nav></Nav>
+      <div className="w-[100%] h-[100%] flex items-center justify-start">
+        <Sidebar></Sidebar>
+
+        <div className="w-[82%] h-[100%] lg:ml-[320px] md:ml-[230px] mt-[70px] flex flex-col gap-[30px] overflow-x-hidden py-[50px] ml-[100px]">
+          <div className="w-[400px] h-[50px] text-[28px] md:text-[40px] mb-[20px] text-white">
+            All Listed Products
+          </div>
+
+          {/* Show the value */}
+          {list?.length > 0 ? (
+            list.map((item, index) => (
+              <div
+                className="w-[90%] md:h-[120px] h-[90px] bg-slate-600 rounded-xl flex items-center justify-start gap-[5px] md:gap-[30px] p-[10px] md:px-[30px]"
+                key={index}
+              >
+                <img
+                  src={item.image1}
+                  alt="Image 1"
+                  className="w-[30px] md:w-[120px] h-[90%] rounded-lg "
+                />
+                <div className="w-[90%] h-[80%] flex flex-col items-start justify-center gap-[2px]">
+                  <div className="w-[100%] md:text-[20px] text-[15px] text-[#bef0f3]">
+                    {item.name}
+                  </div>
+                  <div className="md:text-[17px] text-[15px] text-[#bef3da]">
+                    {item.category}
+                  </div>
+                  <div className="md:text-[17px] text-[15px] text-[#bef3da]">
+                    {item.price}
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="text-white text-lg">No Products available.</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
