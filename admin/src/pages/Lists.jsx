@@ -21,6 +21,26 @@ function Lists() {
     }
   };
 
+  // Item remove
+  const removeList = async (id) => {
+    try {
+      let result = await axios.post(
+        `${import.meta.env.VITE_API_URL}/api/product/remove/${id}`,
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      if (result.data) {
+        fetchList();
+      } else {
+        console.log("Failed to remove Product.");
+      }
+    } catch (err) {
+      console.log(err, "Remove list error");
+    }
+  };
+
   useEffect(() => {
     fetchList();
   }, []);
@@ -56,8 +76,17 @@ function Lists() {
                     {item.category}
                   </div>
                   <div className="md:text-[17px] text-[15px] text-[#bef3da]">
-                    {item.price}
+                    ৳ {item.price}
                   </div>
+                </div>
+
+                <div className="w-[10%] h-[100%] bg-transparent flex items-center justify-center">
+                  <span
+                    onClick={() => removeList(item._id)}
+                    className="w-[35px] h-[30%] flex items-center justify-center rounded-md md:hover:bg-red-500 md:hover:text-black cursor-pointer bg-red-400"
+                  >
+                    X
+                  </span>
                 </div>
               </div>
             ))
